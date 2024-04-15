@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: 'https://blogryter.netlify.app/',
+  origin: 'https://blogryter.netlify.app/*',
   credentials: true,
 }));
 app.use(middlewares);
