@@ -1,22 +1,27 @@
 {
-  "name": "tone-tranlator",
-  "version": "1.0.0",
-  "description": "a system that translates the tone of a new draft to match a provided sample content’s tone, with a user interface for demonstration",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prantikseal/bloryter.git"
-  },
-  "author": "prantikseal",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prantikseal/bloryter/issues"
-  },
-  "homepage": "https://github.com/prantikseal/bloryter#readme",
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+    "name": "tone-translator",
+    "version": "1.0.0",
+    "description": "a system that translates the tone of a new draft to match a provided sample content’s tone, with a user interface for demonstration",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/prantikseal/bloryter.git"
+    },
+    "author": "prantikseal",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/prantikseal/bloryter/issues"
+    },
+    "homepage": "https://github.com/prantikseal/bloryter#readme",
+    "dependencies": {
+        "@langchain/google-genai": "^0.0.11",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "langchain": "^0.1.33"
+    }
 }
