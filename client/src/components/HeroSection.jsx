@@ -1,11 +1,14 @@
+import ContentInput from "./ContentInput";
+import ContentOutput from "./ContentOutput";
 import Tab from "./Tab";
+import ToneAnalyser from "./ToneAnalyser";
 
 
 const HeroSection = () => {
     const tabs = [
-        { title: 'Analyse Tone', content: <div>Content for Tab 1</div> },
-        { title: 'Generate Content', content: <div>Content for Tab 2</div> },
-        { title: 'Review Content', content: <div>Content for Tab 3</div> },
+        { title: 'Analyse Tone', content: <ToneAnalyser />},
+        { title: 'Generate Content', content: <ContentInput />},
+        { title: 'Review Content', content: <ContentOutput />},
     ];
     return (
         <section className=" text-white p-8 ">

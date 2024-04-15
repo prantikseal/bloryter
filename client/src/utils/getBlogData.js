@@ -1,27 +1,21 @@
 import axios from "axios";
 
-const BaseUrl = "http://localhost:3001";
+const BaseUrl = import.meta.env.VITE_BACKEND_API;
 
-const toneAnalyser = async () => {
+const getBlogData = async (topic, additionalDetails, toneAnalysis) => {
     try {
-        const response = await axios.get(`${BaseUrl}/tone-analyzer`);
+        const response = await axios.post(`${BaseUrl}/generate-blog`, { 
+            "topic": `${topic}`,
+            "additionalDetails": `${additionalDetails}`,
+            "toneAnalysis": `${toneAnalysis}`
+         },
+        );
         return response.data;
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
     }
-};
-
-const getBlogData = async () => {
-    try {
-        const response = await axios.get(`${BaseUrl}/blog-data`);
-        const blogData = response.data;
-        const toneData = await toneAnalyser();
-        return { blogData, toneData };
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
+}
 
 export default getBlogData;
+
