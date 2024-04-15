@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import getBlogData from '../utils/getBlogData'
 import { DEMO_BLOG_DATA } from '../utils/constants'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector , useDispatch } from 'react-redux';
+import { setNewBlog } from '../redux/slices/getNewBlogSlice';
+import { setActiveTab } from '../redux/slices/tabSlice';
 
 
 const ContentInput = () => {
@@ -9,16 +14,38 @@ const ContentInput = () => {
   const [blogData, setBlogData] = useState("")
   const [isloading, setIsLoading] = useState(false)
 
+  const toneAnalysis = useSelector((state) => state.toneAnalysis.toneAnalysis.toneAnalysis.kwargs.content);
+
+  const dispatch = useDispatch();
+
 
 
   const handleGenerateContent = async () => {
-    setIsLoading(true)
-    const response = await getBlogData(content, additionalContent, toneAnalysis)
-    // const response = await getBlogData(DEMO_BLOG_DATA.content, DEMO_BLOG_DATA.additionalDetails, DEMO_BLOG_DATA.toneAnalysis)
-    // console.log(response)
-    setBlogData(response)
-    setIsLoading(false)
-  }
+    setIsLoading(true);
+    try {
+      const response = await getBlogData(title, additionalContent, toneAnalysis);
+      // const response = await getBlogData(DEMO_BLOG_DATA.content, DEMO_BLOG_DATA.additionalDetails, DEMO_BLOG_DATA.toneAnalysis);
+      if (!title || !additionalContent) {
+        toast.error('Please enter title or additional details',{
+          position: "bottom-center"
+        });
+        return;
+      }
+      setBlogData(response);
+      // console.log(response)
+      toast.success('Content generated successfully!',{
+        position: "bottom-center"
+      });
+      dispatch(setNewBlog(response));
+      dispatch(setActiveTab(2));
+    } catch (error) {
+      toast.error('Error occurred while generating content',{
+        position: "bottom-center"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div style={
       {
@@ -45,6 +72,7 @@ const ContentInput = () => {
           isloading ? <span className="animate-spin ml-2">🔄</span> : null
         }
       </button>
+      <ToastContainer />
     </div>
   )
 }

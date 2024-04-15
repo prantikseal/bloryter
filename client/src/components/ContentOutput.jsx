@@ -1,35 +1,41 @@
-import { useState } from "react"
-import Editor from 'react-simple-wysiwyg';
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const ContentOutput = () => {
-    const [html, setHtml] = useState('');
+    const [blogData, setBlogData] = useState('');
+
+    const html = useSelector((state) => state.getNewBlog.newBlog.newBlogPost.kwargs.content);
 
     function onChange(e) {
-        setHtml(e.target.value);
-      }
-  return (
-    <div>
-        <Editor 
-        containerProps={
-            {
-                style: {
-                    border: '1px solid black',
-                    backgroundColor: 'white',
-                    color: 'black',
-                    height: '300px',
-                }
-            }
-        }
-        value={html} 
-        onChange={onChange}  />
+        setBlogData(e.target.value);
+    }
 
-        <button className=" bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded mt-4" onClick={()=>{
-            window.location.reload()
-        }} >
-            reset
-        </button>
-    </div>
-  )
+    return (
+        <div>
+            <div className="w-full p-2 mb-4 rounded-lg outline-none border border-slate-900 hover:border-slate-950 focus:border-slate-950 transition-colors duration-300 ease-in-out text-black">
+            {
+                html ? (
+                    <div
+                        dangerouslySetInnerHTML={{ __html: html }}
+                        onChange={onChange}
+                    />
+                ) : (
+                    <div>
+                        <p>Generated content will appear here</p>
+                    </div>
+                )
+            }
+            </div>
+            <button 
+                className="bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded mt-4" 
+                onClick={() => {
+                    window.location.reload();
+                }} 
+            >
+                Reset
+            </button>
+        </div>
+    );
 }
 
-export default ContentOutput
+export default ContentOutput;
