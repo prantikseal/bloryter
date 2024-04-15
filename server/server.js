@@ -13,9 +13,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: 'https://blogryter.netlify.app/*',
+  origin: '*',
   credentials: true,
 }));
+
+
 app.use(middlewares);
 app.use('/analyze-tone', toneAnalysisRoutes);
 app.use('/generate-blog', blogGenerationRoutes);
