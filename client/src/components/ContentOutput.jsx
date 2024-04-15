@@ -18,6 +18,9 @@ const ContentOutput = () => {
                     <div
                         dangerouslySetInnerHTML={{ __html: html }}
                         onChange={onChange}
+                        style={{
+                            color:'wheat'
+                        }}
                     />
                 ) : (
                     <div>
