@@ -50,37 +50,16 @@ This route is used to generate a new blog post based on the provided topic, addi
 }
 ```
 
-Copy code
-# API Documentation
-
-## /analyze-tone
-
-## /generate-blog
-
-### POST /generate-blog
-
-This route is used to generate a new blog post based on the provided topic, additional details, and tone analysis.
-
-**Request Body**
-
-```json
-{
- "topic": "string", // The main topic or subject of the blog post
- "additionalDetails": "string", // Additional details or context for the blog post
- "toneAnalysis": "string" // The tone analysis of a sample blog post
-}
-
-```
 ### Responses
 
-**Success Response (200 OK)
+Success Response (200 OK)
 ```json
 
 {
   "newBlogPost": "string" // The generated blog post content
 }
 ```
-**Error Response (500 Internal Server Error)
+Error Response (500 Internal Server Error)
 
 ```json
 {
