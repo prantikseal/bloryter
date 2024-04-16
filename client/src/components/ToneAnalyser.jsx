@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { setToneAnalysis } from '../redux/slices/toneAnalysisSlice';
 import { setActiveTab } from '../redux/slices/tabSlice';
+import loaderGif from '../assets/loader/loader.gif';
 
 const ToneAnalyser = () => {
   const [content, setContent] = useState('');
@@ -54,11 +55,17 @@ const ToneAnalyser = () => {
         onChange={handleChange}
       />
       <button
-        className=" bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded"
+        className=" bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded flex justify-center items-center gap-2 mt-4"
         onClick={handleAnalyseTone}
       >
         Analyse Tone
-        {isLoading ? <span className="animate-spin ml-2">🔄</span> : null}
+        {isLoading ? <span className="animate-spin ml-2">
+          <img
+            src={loaderGif}
+            alt="loader"
+            className="w-4 h-4"
+          />
+        </span> : null}
       </button>
       
       <ToastContainer />

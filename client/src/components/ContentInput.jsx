@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector , useDispatch } from 'react-redux';
 import { setNewBlog } from '../redux/slices/getNewBlogSlice';
 import { setActiveTab } from '../redux/slices/tabSlice';
+import loaderGif from '../assets/loader/loader.gif';
 
 
 const ContentInput = () => {
@@ -21,16 +22,16 @@ const ContentInput = () => {
 
 
   const handleGenerateContent = async () => {
+    if (!title || !additionalContent) {
+      toast.error('Please enter title or additional details',{
+        position: "bottom-center"
+      });
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await getBlogData(title, additionalContent, toneAnalysis);
       // const response = await getBlogData(DEMO_BLOG_DATA.content, DEMO_BLOG_DATA.additionalDetails, DEMO_BLOG_DATA.toneAnalysis);
-      if (!title || !additionalContent) {
-        toast.error('Please enter title or additional details',{
-          position: "bottom-center"
-        });
-        return;
-      }
       setBlogData(response);
       // console.log(response)
       toast.success('Content generated successfully!',{
@@ -66,10 +67,16 @@ const ContentInput = () => {
           setAdditionalContent(e.target.value)
         }}
       />
-      <button className=" bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded" onClick={handleGenerateContent} >
+      <button className=" bg-slate-900 hover:bg-slate-950 text-white font-bold py-2 px-4 rounded flex justify-center items-center gap-2" onClick={handleGenerateContent} >
         Generate Content
         {
-          isloading ? <span className="animate-spin ml-2">🔄</span> : null
+          isloading ? <span className="animate-spin ml-2">
+          <img
+            src={loaderGif}
+            alt="loader"
+            className="w-4 h-4"
+          />
+          </span> : null
         }
       </button>
       <ToastContainer />
